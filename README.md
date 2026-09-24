@@ -581,6 +581,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)
 ![Local_LLM](https://img.shields.io/badge/Local_LLM-100%25_GPU-blue.svg)
 ![Cost](https://img.shields.io/badge/LLM_Cost-%240.00-success.svg)
+![Observability](https://img.shields.io/badge/Observability-LangSmith-orange.svg)
 
 ---
 
