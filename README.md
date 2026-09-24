@@ -7,6 +7,7 @@
 [![Ollama](https://img.shields.io/badge/Ollama-Local_LLM-purple.svg)](https://ollama.com/)
 [![Qwen](https://img.shields.io/badge/Qwen3-1.7B-teal.svg)](https://ollama.com/library/qwen3)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Checkpointer-blue.svg)](https://www.postgresql.org/)
+[![LangSmith](https://img.shields.io/badge/LangSmith-Observability-orange.svg)](https://smith.langchain.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](#-license)
 
 > **Transform any technical topic into a publication-ready blog post using a multi-agent LangGraph pipeline, local LLMs, and automated research + image generation.**
@@ -76,6 +77,7 @@ There is no **open, offline-capable, end-to-end pipeline** that:
 - ✅ **PostgreSQL checkpointer** — resumable runs, crash-safe
 - ✅ **FastAPI + SSE web UI** — watch every stage live in the browser
 - ✅ **Plug-and-play publishers** — Dev.to today, WordPress/Medium tomorrow
+- ✅ **LangSmith Tracing** — Full observability of every node, LLM call, and tool invocation
 
 ---
 
@@ -104,6 +106,8 @@ There is no **open, offline-capable, end-to-end pipeline** that:
 | **🖼️ Image Fallback** | Bing/DuckDuckGo fallback if Serper fails |
 | **🛡️ Secret-safe** | `.env` based config, `.gitignore` protects keys |
 | **📥 Markdown Download** | Generated `.md` files served via API |
+| **🔬 LangSmith Tracing** | End-to-end observability: node timings, token usage, error traces |
+
 
 ### 🎯 **Use Cases**
 
@@ -142,6 +146,7 @@ graph LR
 | **Cloudinary** | Image hosting and CDN delivery |
 | **PostgreSQL** | Durable checkpoint store |
 | **psycopg** | PostgreSQL driver |
+| **LangSmith** | Observability, tracing, and debugging for LLM pipelines |
 
 ### **Frontend**
 
@@ -193,6 +198,7 @@ flowchart TD
 5. **Workers** fan out in parallel, one per `Task`, writing Markdown
 6. **Reducer** merges sections + images into the final article
 7. **Publisher** posts to Dev.to via REST API
+8. **LangSmith** traces every node execution for observability and debugging
 
 ### **Graph Topology**
 
@@ -360,6 +366,31 @@ data: {"type":"done"}
 ---
 
 ## 🔧 **Configuration**
+---
+
+## 🔬 **Observability with LangSmith**
+
+ScribeStream AI is fully instrumented with **LangSmith** for production-grade observability.
+
+### **What You Get**
+
+- **Trace every node** — Router, Research, Orchestrator, Worker, Reducer, Publisher
+- **Token usage per call** — See how many tokens each LLM node consumed
+- **Latency breakdown** — Identify slow nodes and optimize
+- **Error traces** — Stack traces linked to specific graph executions
+- **Prompt inspection** — See exactly what was sent to the LLM at each step
+
+### **Setup**
+
+1. Sign up at [smith.langchain.com](https://smith.langchain.com/) (free tier: 5,000 traces/month)
+2. Generate an API key from **Settings → API Keys**
+3. Add to `.env`:
+
+```env
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=lsv2_pt_xxxxxxxxxxxxxxxx
+LANGCHAIN_PROJECT=scribestream-ai
+LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 
 ### **`.env` Example**
 
@@ -384,9 +415,15 @@ CLOUDINARY_API_SECRET=xxxxxxxxxxxxxxxxxxxxxx
 
 # ── Publishing ────────────────────────────────────────
 DEV_TO_API_KEY=xxxxxxxxxxxxxxxxxxxx
+
+# ── Observability (optional but recommended) ──────────
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=lsv2_pt_xxxxxxxxxxxxxxxx
+LANGCHAIN_PROJECT=scribestream-ai
+LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
+
 ```
 
-### **Tuning the Model**
 
 In `backend.py`:
 
