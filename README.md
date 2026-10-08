@@ -1,5 +1,5 @@
 [README.md](https://github.com/user-attachments/files/32608078/README.md)
-# ✍️ ScribeStream AI — Autonomous Technical Blog Generator
+# ✍️ ScribeStream AI — Autonomous Technical Blog Generator  
 
 [![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
